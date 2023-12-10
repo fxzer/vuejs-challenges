@@ -6,6 +6,6 @@ const msg = ref('Hello World')
 
 <template>
   <div>
-    <h1>msg</h1>
+    <h1>{{ msg }}</h1>
   </div>
 </template>
