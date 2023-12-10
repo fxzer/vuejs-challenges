@@ -1,21 +1,20 @@
 <script setup lang='ts'>
-
-import { ref } from "vue"
+import { ref } from 'vue'
 
 /**
  * Implement a functional component :
  * 1. Render the list elements (ul/li) with the list data
  * 2. Change the list item text color to red when clicked.
-*/
-const ListComponent = () => {
+ */
+function ListComponent() {
 }
 
 const list = [{
-  name: "John",
+  name: 'John',
 }, {
-  name: "Doe",
+  name: 'Doe',
 }, {
-  name: "Smith",
+  name: 'Smith',
 }]
 
 const activeIndex = ref(0)
@@ -23,11 +22,10 @@ const activeIndex = ref(0)
 function toggle(index: number) {
   activeIndex.value = index
 }
-
 </script>
 
 <template>
-  <list-component
+  <ListComponent
     :list="list"
     :active-index="activeIndex"
     @toggle="toggle"

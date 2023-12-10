@@ -1,6 +1,6 @@
-import type { getOctokit, context } from "@actions/github"
-import type Core from "@actions/core"
-import type IO from "@actions/io"
+import type { context, getOctokit } from '@actions/github'
+import type Core from '@actions/core'
+import type IO from '@actions/io'
 
 export interface QuizMetaInfo {
   title: string

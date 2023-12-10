@@ -1,7 +1,7 @@
-import { mount } from "@vue/test-utils"
-import { describe, it, expect, vi } from "vitest"
+import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 
-import App from "./App.vue"
+import App from './App.vue'
 
 function delay(timeout: number) {
   return new Promise((resolve) => {
@@ -9,8 +9,8 @@ function delay(timeout: number) {
   })
 }
 
-describe("Watch Faimily", () => {
-  it("should work", async() => {
+describe('watch Faimily', () => {
+  it('should work', async () => {
     const result: string[] = []
     console.log = vi.fn((log: string) => {
       result.push(log?.toString()?.trim())
@@ -18,9 +18,9 @@ describe("Watch Faimily", () => {
     mount(App)
     await delay(1000)
     expect(JSON.stringify(result)).toBe(JSON.stringify([
-      "Only triggered once",
-      "The state.count updated",
-      "[object HTMLParagraphElement]",
+      'Only triggered once',
+      'The state.count updated',
+      '[object HTMLParagraphElement]',
     ]))
   })
 })

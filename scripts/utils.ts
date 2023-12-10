@@ -1,5 +1,5 @@
-import { zlibSync, strToU8, strFromU8 } from "fflate"
-import { defaultLocale } from "./locales"
+import { strFromU8, strToU8, zlibSync } from 'fflate'
+import { defaultLocale } from './locales'
 
 export function utoa(data: string): string {
   const buffer = strToU8(data)
@@ -14,11 +14,11 @@ export function serialize(files) {
 
 export function escapeHtml(unsafe: string) {
   return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;")
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }
 
 export function resolveFilePath(dir: string, name: string, ext: string, locale: string) {

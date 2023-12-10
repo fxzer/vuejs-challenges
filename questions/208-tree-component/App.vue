@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import TreeComponent from "./TreeComponent.vue"
+import { ref } from 'vue'
+import TreeComponent from './TreeComponent.vue'
+
 const treeData = ref([{
   key: '1',
   title: 'Parent 1',
@@ -16,8 +17,8 @@ const treeData = ref([{
     }, {
       key: '1-2-2',
       title: 'grandchild 2',
-    },]
-  },]
+    }],
+  }],
 }, {
   key: '2',
   title: 'Parent 2',
@@ -30,11 +31,11 @@ const treeData = ref([{
     }, {
       key: '2-1-2',
       title: 'grandchild 2',
-    },]
+    }],
   }, {
     key: '2-2',
     title: 'child 2',
-  },]
+  }],
 }])
 </script>
 

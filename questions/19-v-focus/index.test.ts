@@ -1,7 +1,7 @@
-import { mount } from "@vue/test-utils"
-import { describe, it, expect } from "vitest"
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
 
-import App from "./App.vue"
+import App from './App.vue'
 
 function delay(timeout: number) {
   return new Promise((resolve) => {
@@ -9,14 +9,14 @@ function delay(timeout: number) {
   })
 }
 
-describe("v-focus", () => {
-  it("should work", async() => {
+describe('v-focus', () => {
+  it('should work', async () => {
     const wrapper = mount(App, {
       attachTo: document.body,
     })
 
-    expect(wrapper.find("input").element).not.toBe(document.activeElement)
+    expect(wrapper.find('input').element).not.toBe(document.activeElement)
     await delay(3000)
-    expect(wrapper.find("input").element).toBe(document.activeElement)
+    expect(wrapper.find('input').element).toBe(document.activeElement)
   })
 })

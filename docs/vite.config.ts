@@ -1,7 +1,7 @@
-import { resolve } from "path"
-import { defineConfig } from "vite"
-import Components from "unplugin-vue-components/vite"
-import { MarkdownTransform } from "./.vitepress/plugins/markdownTransform"
+import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
+import Components from 'unplugin-vue-components/vite'
+import { MarkdownTransform } from './.vitepress/plugins/markdownTransform'
 
 export default defineConfig({
   server: {
@@ -9,7 +9,7 @@ export default defineConfig({
       overlay: false,
     },
     fs: {
-      allow: [resolve(__dirname, "..")],
+      allow: [resolve(__dirname, '..')],
     },
   },
 
@@ -17,8 +17,8 @@ export default defineConfig({
     MarkdownTransform(),
     Components({
       include: [/\.vue/, /\.md/],
-      dirs: ".vitepress/components",
-      dts: ".vitepress/components.d.ts",
+      dirs: '.vitepress/components',
+      dts: '.vitepress/components.d.ts',
     }),
   ],
 

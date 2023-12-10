@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from "vue"
+import { computed, ref, watch, watchEffect } from 'vue'
 
 const counter = ref(1)
 const doubled = computed(() => counter.value * 2)
@@ -14,7 +14,6 @@ counter.value = 2
 setTimeout(() => {
   counter.value = 4
 })
-
 </script>
 
 <template>

@@ -1,17 +1,18 @@
-import { mount } from "@vue/test-utils"
-import { describe, it, expect, vi } from "vitest"
+import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 
-import App from "./App.vue"
+import App from './App.vue'
 
-describe("key modifiers", () => {
-  it("should work", async() => {
-    let printLog = ""
+describe('key modifiers', () => {
+  it('should work', async () => {
+    let printLog = ''
     console.log = vi.fn(
       (log: string) => {
         printLog = log?.toString()?.trim()
-      })
+      },
+    )
     const wrapper = mount(App)
-    const buttons = wrapper.findAll("button")
+    const buttons = wrapper.findAll('button')
 
     await buttons[0].trigger('click')
     expect(printLog).toMatchInlineSnapshot('""')

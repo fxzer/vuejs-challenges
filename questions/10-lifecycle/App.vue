@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, provide } from "vue"
-import Child from "./Child.vue"
+import { provide, ref } from 'vue'
+import Child from './Child.vue'
 
 const visible = ref(true)
 const timer = ref(null)
 const count = ref(0)
-provide("timer", timer)
-provide("count", count)
+provide('timer', timer)
+provide('count', count)
 
 function toggle() {
   visible.value = !visible.value

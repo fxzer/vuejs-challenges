@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { onMounted, inject } from "vue"
+import { inject, onMounted } from 'vue'
 
-const timer = inject("timer")
-const count = inject("count")
+const timer = inject('timer')
+const count = inject('count')
 
 onMounted(() => {
   timer.value = window.setInterval(() => {
     count.value++
   }, 1000)
 })
-
 </script>
 
 <template>

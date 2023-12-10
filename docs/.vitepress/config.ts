@@ -1,26 +1,27 @@
-import { defineConfig } from "vitepress"
-import { categorys, navMenu } from "../meta"
+import { defineConfig } from 'vitepress'
+import { categorys, navMenu } from '../meta'
+
 const defaultSidebar = [
   {
-    text: "Introduction",
+    text: 'Introduction',
     items: [
       {
-        text: "Getting Started",
-        link: "/getting-started",
+        text: 'Getting Started',
+        link: '/getting-started',
       },
     ],
   },
   {
-    text: "Guide",
+    text: 'Guide',
     items: [
       {
-        text: "How to Contribute",
-        link: "/guide/contribution",
+        text: 'How to Contribute',
+        link: '/guide/contribution',
       },
     ],
   },
   {
-    text: "Challenges",
+    text: 'Challenges',
     items: categorys,
   },
 ]
@@ -30,32 +31,32 @@ const nav = [
 ]
 
 export default defineConfig({
-  title: "Vue.js challenges",
-  description: "Collection of Vue.js challenges",
+  title: 'Vue.js challenges',
+  description: 'Collection of Vue.js challenges',
   // appearance: false,
   lastUpdated: true,
   themeConfig: {
     sidebar: {
-      "/challenges": navMenu,
-      "/questions/": navMenu,
-      "/": defaultSidebar,
+      '/challenges': navMenu,
+      '/questions/': navMenu,
+      '/': defaultSidebar,
     },
     nav,
     socialLinks: [
-      { icon: "github", link: "https://github.com/webfansplz/vuejs-challenges" },
+      { icon: 'github', link: 'https://github.com/webfansplz/vuejs-challenges' },
     ],
     footer: {
-      copyright: "Copyright © 2022-present webfansplz",
+      copyright: 'Copyright © 2022-present webfansplz',
     },
     editLink: {
-      pattern: "https://github.com/webfansplz/vuejs-challenges",
-      text: "Edit this page on Gitlab",
+      pattern: 'https://github.com/webfansplz/vuejs-challenges',
+      text: 'Edit this page on Gitlab',
     },
-    lastUpdatedText: "Last Updated",
+    lastUpdatedText: 'Last Updated',
     localeLinks: {
-      text: "English",
+      text: 'English',
       items: [
-        { text: "简体中文", link: "https://cn-vuejs-challenges.netlify.app" },
+        { text: '简体中文', link: 'https://cn-vuejs-challenges.netlify.app' },
       ],
     },
   },

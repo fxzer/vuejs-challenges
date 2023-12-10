@@ -1,7 +1,7 @@
-import { mount } from "@vue/test-utils"
-import { describe, it, expect, vi } from "vitest"
+import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 
-import App from "./App.vue"
+import App from './App.vue'
 
 function delay(timeout: number) {
   return new Promise((resolve) => {
@@ -9,8 +9,8 @@ function delay(timeout: number) {
   })
 }
 
-describe("custom-ref", () => {
-  it("should work", async() => {
+describe('custom-ref', () => {
+  it('should work', async () => {
     let printLog = ''
     console.log = vi.fn((log: string) => {
       printLog = log?.toString()?.trim()
@@ -18,12 +18,12 @@ describe("custom-ref", () => {
 
     const wrapper = mount(App)
 
-    await wrapper.find("input").setValue("hello!")
+    await wrapper.find('input').setValue('hello!')
     expect(printLog).toMatchInlineSnapshot('""')
     await delay(200)
     expect(printLog).toMatchInlineSnapshot('"hello!"')
 
-    await wrapper.find("input").setValue("world")
+    await wrapper.find('input').setValue('world')
     expect(printLog).toMatchInlineSnapshot('"hello!"')
     await delay(200)
     expect(printLog).toMatchInlineSnapshot('"world"')

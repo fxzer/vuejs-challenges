@@ -1,16 +1,17 @@
-import path from "path"
-import fs from "fs-extra"
-import { escapeHtml } from "./utils"
-import { resolveInfo } from "./loader"
-import { QUIZ_ROOT, REPO, DIFFICULTY_COLORS, DIFFICULTY_RANK } from "./configs"
-import { defaultLocale, f, SupportedLocale, supportedLocales, t } from "./locales"
-import { generateBadge, generateBadgeLink, generateDifficultyBadge, generateDifficultyBadgeInverted } from "./badge"
-import type { Quiz, QuizMetaInfo } from "./types"
+import path from 'node:path'
+import fs from 'fs-extra'
+import { escapeHtml } from './utils'
+import { resolveInfo } from './loader'
+import { DIFFICULTY_COLORS, DIFFICULTY_RANK, QUIZ_ROOT, REPO } from './configs'
+import type { SupportedLocale } from './locales'
+import { defaultLocale, f, supportedLocales, t } from './locales'
+import { generateBadge, generateBadgeLink, generateDifficultyBadge, generateDifficultyBadgeInverted } from './badge'
+import type { Quiz, QuizMetaInfo } from './types'
 
 export function getNearborREADME(quiz: Quiz, locale?: string) {
   return locale && locale !== defaultLocale && quiz.readme[locale]
     ? `./README.${locale}.md`
-    : "./README.md"
+    : './README.md'
 }
 
 export function generateShareAnswerLink(quiz: Quiz, locale: string = defaultLocale) {
@@ -25,12 +26,12 @@ export function generateSolutionsLink(no: number) {
   return `${REPO}/issues?q=label%3A${no}+label%3Aanswer`
 }
 
-function generateAuthorInfo(author: Partial<QuizMetaInfo["author"]> = {}) {
-  return `By ${author.name}${author.github ? ` <a href="https://github.com/${author.github}" target="_blank">@${author.github}</a>` : ""}`
+function generateAuthorInfo(author: Partial<QuizMetaInfo['author']> = {}) {
+  return `By ${author.name}${author.github ? ` <a href="https://github.com/${author.github}" target="_blank">@${author.github}</a>` : ''}`
 }
 
 export function generateQuizREADME(quiz: Quiz, locale?: string, absolute = false) {
-  const prefix = absolute ? `${REPO}/blob/master` : "."
+  const prefix = absolute ? `${REPO}/blob/master` : '.'
   return locale && locale !== defaultLocale && quiz.readme[locale]
     ? `${prefix}/questions/${quiz.path}/README.${locale}.md`
     : `${prefix}/questions/${quiz.path}/README.md`
@@ -41,7 +42,7 @@ function quizToBadge(quiz: Quiz, locale: string, absolute = false) {
 
   return generateBadgeLink(
     generateQuizREADME(quiz, locale, absolute),
-    "",
+    '',
     `${quiz.no}・${quiz.info![locale]?.title || quiz.info![defaultLocale]?.title}`,
     DIFFICULTY_COLORS[info.difficulty],
   )
@@ -67,37 +68,38 @@ export function getQuizesByTag(quizes: Quiz[], locale: string, tag: string) {
 async function insertInfoToREADME(filepath: string, quiz: Quiz, locale: SupportedLocale) {
   if (!fs.existsSync(filepath))
     return
-  const text = await fs.readFile(filepath, "utf-8")
+  const text = await fs.readFile(filepath, 'utf-8')
   /* eslint-disable prefer-template */
 
   const info = resolveInfo(quiz, locale)
-  if (Object.keys(info).length === 0) return
+  if (Object.keys(info).length === 0)
+    return
   const availableLocales = supportedLocales.filter(l => l !== locale).filter(l => !!quiz.readme[l])
   const fileContent = text
     .replace(
       /<!--info-header-start-->[\s\S]*<!--info-header-end-->/,
-      "<!--info-header-start-->"
-      + `<h1>${escapeHtml(info.title || "")} ${generateDifficultyBadge(info.difficulty, locale)} ${(info.tags || []).map(i => generateBadge("", `#${i}`, "999")).join(" ")}</h1>`
+      '<!--info-header-start-->'
+      + `<h1>${escapeHtml(info.title || '')} ${generateDifficultyBadge(info.difficulty, locale)} ${(info.tags || []).map(i => generateBadge('', `#${i}`, '999')).join(' ')}</h1>`
       + `<blockquote><p>${generateAuthorInfo(info.author)}</p></blockquote>`
-      + "<p>"
-      + generateBadgeLink(quiz.quizLink, "", t(locale, "badge.take-the-challenge"), "213547", "?logo=vue.js&logoColor=42b883")
-      + (availableLocales.length ? ("&nbsp;&nbsp;&nbsp;" + availableLocales.map(l => generateBadgeLink(getNearborREADME(quiz, l), "", t(l, "display"), "gray")).join(" ")) : "")
+      + '<p>'
+      + generateBadgeLink(quiz.quizLink, '', t(locale, 'badge.take-the-challenge'), '213547', '?logo=vue.js&logoColor=42b883')
+      + (availableLocales.length ? ('&nbsp;&nbsp;&nbsp;' + availableLocales.map(l => generateBadgeLink(getNearborREADME(quiz, l), '', t(l, 'display'), 'gray')).join(' ')) : '')
       // + (quiz.stackblitzLink[locale]
       //   ? "&nbsp;&nbsp;&nbsp;" + `<a href=${quiz.stackblitzLink[locale]}>${t(locale, "badge.take-the-challenge-unit-test")}</a>`
       //   : "")
-      + "</p>"
-      + "<!--info-header-end-->",
+      + '</p>'
+      + '<!--info-header-end-->',
     )
     .replace(
       /<!--info-footer-start-->[\s\S]*<!--info-footer-end-->/,
-      "<!--info-footer-start--><br>"
-      + generateBadgeLink(`../../${f("README", locale, "md")}`, "", t(locale, "badge.back"), "grey")
-      + generateBadgeLink(generateShareAnswerLink(quiz, locale), "", t(locale, "badge.share-your-solutions"), "teal")
-      + generateBadgeLink(generateSolutionsLink(quiz.no), "", t(locale, "badge.checkout-solutions"), "de5a77", "?logo=awesome-lists&logoColor=white")
-      + "<!--info-footer-end-->",
+      '<!--info-footer-start--><br>'
+      + generateBadgeLink(`../../${f('README', locale, 'md')}`, '', t(locale, 'badge.back'), 'grey')
+      + generateBadgeLink(generateShareAnswerLink(quiz, locale), '', t(locale, 'badge.share-your-solutions'), 'teal')
+      + generateBadgeLink(generateSolutionsLink(quiz.no), '', t(locale, 'badge.checkout-solutions'), 'de5a77', '?logo=awesome-lists&logoColor=white')
+      + '<!--info-footer-end-->',
     )
 
-  await fs.writeFile(filepath, fileContent, "utf-8")
+  await fs.writeFile(filepath, fileContent, 'utf-8')
 }
 
 export async function updateQuizREADME(quizes: Quiz[]) {
@@ -108,7 +110,7 @@ export async function updateQuizREADME(quizes: Quiz[]) {
         path.join(
           QUIZ_ROOT,
           quiz.path,
-          f("README", locale, "md"),
+          f('README', locale, 'md'),
         ),
         quiz,
         locale,
@@ -120,10 +122,10 @@ export async function updateQuizREADME(quizes: Quiz[]) {
 export async function updateIndexREADME(quizes: Quiz[]) {
   // update index README
   for (const locale of supportedLocales) {
-    const filepath = path.resolve(__dirname, "..", f("README", locale, "md"))
+    const filepath = path.resolve(__dirname, '..', f('README', locale, 'md'))
 
-    let challengesREADME = ""
-    let prev = ""
+    let challengesREADME = ''
+    let prev = ''
 
     // By Difficulty
 
@@ -136,10 +138,11 @@ export async function updateIndexREADME(quizes: Quiz[]) {
     for (const quiz of quizesByDifficulty) {
       const info = resolveInfo(quiz, locale)
 
-      if (Object.keys(info).length === 0) return
+      if (Object.keys(info).length === 0)
+        return
 
       if (prev !== info!.difficulty!) {
-        challengesREADME += `${prev ? "<br><br>" : ""}${generateDifficultyBadgeInverted(info!.difficulty!, locale, quizesByDifficulty.filter((q) => {
+        challengesREADME += `${prev ? '<br><br>' : ''}${generateDifficultyBadgeInverted(info!.difficulty!, locale, quizesByDifficulty.filter((q) => {
           const qInfo = resolveInfo(q, locale)
           return qInfo.difficulty === info!.difficulty
         }).length)}<br>`
@@ -152,23 +155,23 @@ export async function updateIndexREADME(quizes: Quiz[]) {
 
     // By Tags
 
-    challengesREADME += "<br><details><summary>By Tags</summary><br><table><tbody>"
+    challengesREADME += '<br><details><summary>By Tags</summary><br><table><tbody>'
     const tags = getAllTags(quizes, locale)
     for (const tag of tags) {
-      challengesREADME += `<tr><td>${generateBadge("", `#${tag}`, "999")}</td><td>`
+      challengesREADME += `<tr><td>${generateBadge('', `#${tag}`, '999')}</td><td>`
       getQuizesByTag(quizesByDifficulty, locale, tag)
         .forEach((quiz) => {
           challengesREADME += quizToBadge(quiz, locale)
         })
-      challengesREADME += "</td></tr>"
+      challengesREADME += '</td></tr>'
     }
-    challengesREADME += "</tbody></table></details>"
+    challengesREADME += '</tbody></table></details>'
 
-    let readme = await fs.readFile(filepath, "utf-8")
+    let readme = await fs.readFile(filepath, 'utf-8')
     readme = readme.replace(
       /<!--challenges-start-->[\s\S]*<!--challenges-end-->/m,
       `<!--challenges-start-->\n${challengesREADME}\n<!--challenges-end-->`,
     )
-    await fs.writeFile(filepath, readme, "utf-8")
+    await fs.writeFile(filepath, readme, 'utf-8')
   }
 }

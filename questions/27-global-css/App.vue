@@ -3,10 +3,9 @@
 </template>
 
 <style scoped>
-
 p {
-  font-size:20px;
-  color:red;
+  font-size: 20px;
+  color: red;
   text-align: center;
   line-height: 50px;
 }
@@ -15,6 +14,6 @@ p {
 body {
   width: 100vw;
   height: 100vh;
-  background-color: burlywood;
+  background-color: skyblue;
 }
 </style>

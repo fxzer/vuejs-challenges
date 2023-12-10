@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-const value = ref("")
+
+const value = ref('')
 </script>
 
 <template>
-  <input type="text" v-model.capitalize="value" />
+  <input v-model="value" type="text">
 </template>

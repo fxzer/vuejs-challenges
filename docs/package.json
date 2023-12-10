@@ -1,18 +1,18 @@
 {
-  "author": "webfansplz",
-  "description": "",
-  "devDependencies": {
-    "sass": "^1.53.0",
-    "unplugin-vue-components": "^0.21.0",
-    "vite": "^2.9.13",
-    "vitepress": "1.0.0-alpha.4"
-  },
-  "license": "MIT",
   "private": true,
+  "description": "",
+  "author": "webfansplz",
+  "license": "MIT",
   "scripts": {
     "build": "npm run update && vitepress build .",
     "dev": "npm run update && vitepress dev . --host",
     "serve": "vitepress serve . --port 5001",
     "update": "tsx ./scripts/update.ts"
+  },
+  "devDependencies": {
+    "sass": "^1.53.0",
+    "unplugin-vue-components": "^0.21.0",
+    "vite": "^2.9.13",
+    "vitepress": "1.0.0-alpha.4"
   }
 }
