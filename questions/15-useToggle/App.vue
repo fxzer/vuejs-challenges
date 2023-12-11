@@ -1,10 +1,16 @@
 <script setup lang='ts'>
+import { ref } from 'vue'
+
 /**
  * Implement a composable function that toggles the state
  * Make the function work correctly
  */
-function useToggle() {
-
+function useToggle(inital: boolean) {
+  const state = ref(inital)
+  const toggle = () => {
+    state.value = !state.value
+  }
+  return [state, toggle]
 }
 
 const [state, toggle] = useToggle(false)

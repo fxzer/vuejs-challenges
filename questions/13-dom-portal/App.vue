@@ -4,5 +4,8 @@ const msg = 'Hello World'
 
 <template>
   <!-- Renders it to a child element of the `body` -->
-  <span>{{ msg }}</span>
+  <!-- 使用 teleport 将内容渲染到 body 的子元素中 -->
+  <teleport to="body">
+    <span>{{ msg }}</span>
+  </teleport>
 </template>

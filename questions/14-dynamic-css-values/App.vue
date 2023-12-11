@@ -11,12 +11,17 @@ setInterval(() => {
 </script>
 
 <template>
-  <p>hello</p>
+  <!-- <p>hello</p> -->
+  <!-- 使用动态值绑定颜色 -->
+  <p :style="{ color: theme }">
+    hello
+  </p>
 </template>
-
+<!--
 <style scoped>
 /* Modify the code to bind the dynamic color */
 p {
-  color: red;
+  color: v-bind(theme);
 }
 </style>
+ -->
