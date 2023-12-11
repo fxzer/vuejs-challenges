@@ -12,12 +12,14 @@ function useCount() {
 
   return {
     state: toRefs(state),
+    // ...toRefs(state), // spread operator (...)
     update,
   }
 }
 
 // Ensure the destructured properties don't lose their reactivity
 const { state: { count }, update } = useCount()
+// const { count, update } = useCount()
 </script>
 
 <template>

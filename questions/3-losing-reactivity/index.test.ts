@@ -16,6 +16,7 @@ describe('losingReactivity', () => {
   it('count is Ref', () => {
     const wrapper = mount(LosingReactivity)
     const { state: { count } } = (wrapper.vm as unknown as LosingReactivityType).useCount()
+    // const { count } = (wrapper.vm as unknown as LosingReactivityType).useCount()
     expect(isRef(count)).toBe(true)
   })
 })
