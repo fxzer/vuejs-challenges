@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 
 const count = ref(0)
 
@@ -9,7 +9,22 @@ const count = ref(0)
 
 function until(initial) {
   function toBe(value) {
-
+    return new Promise<void>((resolve) => {
+      // watch
+    /*   const unwatch = watch(initial, (newVal) => {
+        if ((newVal === value)) {
+          unwatch()
+          resolve()
+        }
+      }) */
+      // watchEffect
+      const unwatch = watchEffect(() => {
+        if (initial.value === value) {
+          unwatch()
+          resolve()
+        }
+      })
+    })
   }
 
   return {

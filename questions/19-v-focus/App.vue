@@ -10,7 +10,13 @@ const state = ref(false)
  */
 
 const VFocus = {
-
+  mounted(el, binding) {
+    if (binding.value)
+      el.focus()
+  },
+  updated(el, binding) {
+    binding.value ? el.focus() : el.blur()
+  },
 }
 
 setInterval(() => {

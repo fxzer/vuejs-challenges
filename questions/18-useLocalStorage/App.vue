@@ -1,12 +1,23 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { computed, customRef, ref, watch } from 'vue'
 
 /**
  * Implement the composable function
  * Make sure the function works correctly
  */
 function useLocalStorage(key: string, initialValue: any) {
-  const value = ref(initialValue)
+  const value = customRef((track, trigger) => {
+    return ({
+      get() {
+        track()
+        return localStorage.getItem(key) || initialValue
+      },
+      set(value) {
+        trigger()
+        localStorage.setItem(key, value)
+      },
+    })
+  })
 
   return value
 }
