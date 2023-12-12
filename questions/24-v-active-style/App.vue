@@ -1,13 +1,31 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { type Directive, computed, ref, watchEffect } from 'vue'
 
 /**
  * Implement the custom directive
  * Make sure the list item text color changes to red when the `toggleTab` is toggled
  *
  */
-const VActiveStyle = {
+ type Binding = [CSSStyleDeclaration, () => boolean]
 
+function handler(el: HTMLElement, binding: Binding) {
+  const [activeStyles, activeCondition] = binding
+  const isActive = computed(activeCondition)
+  // const isActive = computed((): boolean => activeCondition())
+
+  watchEffect(() => {
+    for (const [key, value] of Object.entries(activeStyles))
+      el.style[key] = isActive.value ? value : ''
+  })
+}
+
+const VActiveStyle: Directive<HTMLElement, Binding> = {
+  mounted(el, binding) {
+    handler(el, binding.value)
+  },
+  updated(el, binding) {
+    handler(el, binding.value)
+  },
 }
 
 const list = [1, 2, 3, 4, 5, 6, 7, 8]

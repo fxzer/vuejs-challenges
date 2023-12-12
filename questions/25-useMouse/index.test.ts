@@ -7,7 +7,7 @@ import App from './App.vue'
 describe('useMouse', () => {
   it('should work', async () => {
     const wrapper = mount(App)
-    expect(wrapper.html()).toBe('Mouse position is at: 0, 0')
+    expect(wrapper.html().trim()).toBe('Mouse position is at: 0, 0')
 
     const mousemove = new MouseEvent('mousemove', {
       screenX: 10,
@@ -18,6 +18,6 @@ describe('useMouse', () => {
     window.dispatchEvent(mousemove)
 
     await nextTick()
-    expect(wrapper.html()).toBe('Mouse position is at: 10, 20')
+    expect(wrapper.html().trim()).toBe('Mouse position is at: 10, 20')
   })
 })

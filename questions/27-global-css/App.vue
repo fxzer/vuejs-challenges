@@ -11,6 +11,14 @@ p {
 }
 
 /* Make it work */
+/* :global(body) {
+  width: 100vw;
+  height: 100vh;
+  background-color: skyblue;
+} */
+</style>
+
+<style>
 body {
   width: 100vw;
   height: 100vh;

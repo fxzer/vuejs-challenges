@@ -1,8 +1,23 @@
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'MyButton',
-  render() {
-    return h(/** do someting */)
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ['custom-click'],
+  setup(props, { emit, slots }) {
+    return () =>
+      h(
+        'button',
+        {
+          disabled: props.disabled,
+          onClick: () => emit('custom-click'),
+        },
+        slots.default?.(),
+      )
   },
 })

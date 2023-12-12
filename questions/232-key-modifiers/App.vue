@@ -11,18 +11,18 @@ function onClick2() {
 </script>
 
 <template>
-  <!-- Add key modifiers made this will fire even if Alt or Shift is also pressed -->
-  <button @click="onClick1">
-    A
-  </button>
+  <!-- 添加按键修饰符让即使 Alt 或 Shift 被一同按下时也会触发 -->
+  <button @click.alt.shift.exact="onClick1">
+    onClick1
+  </button>&nbsp;
 
-  <!-- Add key modifiers made this will only fire when Shift and no other keys are pressed -->
-  <button @click="onCtrlClick">
-    A
-  </button>
+  <!-- 添加按键修饰符让有且只有 Shift 被按下的时候才触发 -->
+  <button @click.shift.exact="onCtrlClick">
+    onCtrlClick
+  </button>&nbsp;
 
-  <!-- Add key modifiers made this will only fire when no system modifiers are pressed -->
-  <button @click="onClick2">
-    A
+  <!-- 添加按键修饰符让没有任何系统修饰符被按下的时候才触发 -->
+  <button @click.exact="onClick2">
+    onClick2
   </button>
 </template>

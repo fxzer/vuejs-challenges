@@ -7,7 +7,7 @@ function onClick() {
 </script>
 
 <template>
-  <MyButton :disabled="false" @custom-click="onClick">
+  <MyButton type="submit" class="om" :disabled="false" @custom-click="onClick">
     my button
   </MyButton>
 </template>

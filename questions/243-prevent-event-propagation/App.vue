@@ -10,7 +10,7 @@ function click2() {
 
 <template>
   <div @click="click1()">
-    <div @click="click2()">
+    <div @click.stop="click2()">
       click me
     </div>
   </div>

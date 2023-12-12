@@ -1,11 +1,25 @@
 <script setup>
-import { watch } from 'vue'
+import { customRef, watch } from 'vue'
 
 /**
  * Implement the function
  */
 function useDebouncedRef(value, delay = 200) {
-
+  let timer
+  return customRef((track, trigger) => ({
+    get() {
+      track()
+      return value
+    },
+    set(newValue) {
+      if (timer)
+        clearTimeout(timer)
+      setTimeout(() => {
+        value = newValue
+        trigger()
+      }, delay)
+    },
+  }))
 }
 const text = useDebouncedRef('hello')
 
